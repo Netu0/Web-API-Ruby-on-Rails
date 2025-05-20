@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.8.8
+    container_name: mariadb-api
+    ports:
+      - "5000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: oswaldo
+      MYSQL_DATABASE: reservas_api_prod
+      MYSQL_USER: reservas_user
+      MYSQL_PASSWORD: senha_segura
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-poswaldo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      args:
+        BUNDLE_WITHOUT: ""
+    container_name: rails-api
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
+    volumes:
+      - gem_cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: reservas_user
+      DATABASE_PASSWORD: senha_segura
+      DATABASE_PORT: 3306
+      RAILS_ENV: development
+      BUNDLE_WITHOUT: ""
+
+volumes:
+  mariadb_data:
+  gem_cache:

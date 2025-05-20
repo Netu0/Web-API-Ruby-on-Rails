@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  data_inicio: 2025-05-20 01:40:18
+  data_fim: 2025-05-20 01:40:18
+
+two:
+  nome: MyString
+  data_inicio: 2025-05-20 01:40:18
+  data_fim: 2025-05-20 01:40:18

@@ -1,0 +1,22 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["DATABASE_HOST"] || "localhost" %>
+  port: <%= ENV["DATABASE_PORT"] || 5000 %> # ajuste se for 5000 no Docker
+  username: <%= ENV["DATABASE_USERNAME"] || "root" %>
+  password: <%= ENV["DATABASE_PASSWORD"] || "oswaldo" %>
+
+development:
+  <<: *default
+  database: reservas_api_development
+
+test:
+  <<: *default
+  database: reservas_api_test
+
+production:
+  <<: *default
+  database: reservas_api_production
+  username: root
+  password: oswaldo
