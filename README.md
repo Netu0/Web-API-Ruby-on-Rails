@@ -17,23 +17,39 @@ Este projeto é uma aplicação em Ruby on Rails (modo API) desenvolvida como pa
 
 
 app/
+
 ├── controllers/
+
 │ └── reservas_controller.rb
+
 ├── models/
+
 │ └── reserva.rb
+
 ├── repositories/
+
 │ └── reserva_repository.rb
+
 ├── services/
+
 │ └── reserva_service.rb
+
 ├── middlewares/
+
 │ └── error_handler.rb
 
+
 config/
+
 ├── routes.rb
+
 ├── application.rb
 
+
 db/
+
 └── migrate/
+
 
 
 ## ⚙️ Tecnologias Utilizadas
@@ -83,7 +99,10 @@ config.middleware.use ErrorHandler
 # DOCKER
 
 Essa aplicação foi feita com docker, dessa forma, o banco de dados e a API ficam separados em dois containers diferentes!
-
+Comando para criar os conteiners via docker
+```
+docker-compose up --build
+```
 # TESTES
 ## Acesso ao rails
 ```
@@ -119,3 +138,5 @@ curl -X POST http://localhost:3000/reservas \
   -H "Content-Type: application/json" \
   -d '{"reserva": {"nome": "ReservaNova", "data_inicio": "2025-05-24", "data_fim": "2025-05-22"}}'
 ```
+
+# Ao rodar os containeres, basta acessar: http://localhost:3000/
